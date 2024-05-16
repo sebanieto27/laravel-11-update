@@ -1,18 +1,13 @@
 <?php
 
-use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Dashboard\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('index', [IndexController::class, 'index']);
+Route::get('test', [TestController::class, 'test'])->name('test');
 
-Route::get('contact', [IndexController::class, 'contact'])->name('contact');
-
-Route::get('contact2', [IndexController::class, 'contact2'])->name('contact2');
-
-Route::resource('post', IndexController::class);
-
-Route::get('otro/{post}', [IndexController::class, 'otro']);
+Route::resource('post', PostController::class);

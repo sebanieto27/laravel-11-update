@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\PatchRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -24,8 +25,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $post = new Post();
         $categories = Category::pluck('id', 'title');
-        return view('dashboard.post.create', compact('categories'));
+        return view('dashboard.post.create', compact('categories', 'post'));
     }
 
     /**
@@ -88,9 +90,17 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRequest $request, Post $post)
+    public function update(PatchRequest $request, Post $post)
     {
-        $post->update($request->validated());
+        // dd(public_path('upload\posts'));
+        $data = $request->validated();
+        dd($request->image);
+        if(isset($data['image'])){
+            $data['image'] = $filname = time().$data['image']->extension();
+            $request->image->move(public_path('uploads/posts'),$filname);
+        };
+
+        $post->update($data);
         return to_route('post.index');
     }
 

@@ -19,6 +19,7 @@
                         <th scope="col">Título</th>
                         <th scope="col">Posted</th>
                         <th scope="col">Categoría</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->posted }}</td>
                         <td>{{ $post->category->title }}</td>
+                        <td></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="">
                                 <a type="button" href="{{ route('post.show', $post->id) }}" class="btn btn-primary">Ver</a>

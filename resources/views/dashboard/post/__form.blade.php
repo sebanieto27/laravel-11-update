@@ -17,9 +17,7 @@
     <label for="category_id" class="form-label">Categoría</label>
     <select id="category_id" class="form-select" name="category_id">
         @foreach ($categories as $title => $id)
-            <option value="{{ $id }}" {{ $post->category && $post->category->id == $id ? 'selected' : '' }}>
-                {{ old('title', $title) }}
-            </option>
+            <option {{ old('category_id', $post->category_id) == $id ? 'selected' : '' }} value="{{ $id }}">{{$title}}</option>
         @endforeach
         </option>
     </select>
@@ -33,10 +31,10 @@
 </div>
 @if (isset ($task) && $task == 'edit')
     <div class="col-md-4">
-        <label for="" class="form-label">Imagen</label>
+        <label for="" class="form-label ">Nombre imagen: <strong>{{$post->image}}</strong></label>
         <div class="text-center">
-            <img src="..." class="rounded" alt="...">
-            <input type="file" value="image">
+            <img src="/uploads/posts/{{$post->image}}" class="rounded m-4" alt="...">
+            <input type="file" name="image">
         </div>
 
     </div>

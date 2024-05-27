@@ -22,13 +22,13 @@ class PatchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:5|max:100',
+            'title' => 'required|min:8|max:100',
             // 'slug' => 'required|min:5|max:100|unique:posts',
             'content' => 'required|min:7|max:100',
             'category_id' => 'required|integer',
             'description' => 'required|min:5|max:100',
             'posted' => 'required',
-            'image' => 'nimes:jpeg,jpg,png|max:10240',
+            'image' => 'mimes:jpeg,jpg,png|max:10240',
         ];
     }
 }

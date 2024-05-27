@@ -8,7 +8,7 @@
             </div>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('post.create')}}">Crear post</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('post.create') }}">Crear post</a>
                 </li>
             </ul>
             <h2>Lista de posts</h2>
@@ -35,8 +35,13 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="">
                                 <a type="button" href="{{ route('post.show', $post->id) }}" class="btn btn-primary">Ver</a>
-                                <a type="button" href="{{ route('post.edit', $post->id) }}" class="btn btn-warning">Editar</a>
-                                <a type="button" href="{{ route('post.destroy', $post->id) }}" class="btn btn-danger">Eliminar</a>
+                                <a type="button" href="{{ route('post.edit', $post->id) }}"
+                                    class="btn btn-warning">Editar</a>
+                                <form action="{{ route('post.destroy', $post->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

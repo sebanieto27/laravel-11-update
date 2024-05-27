@@ -74,7 +74,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('dashboard.post.show', compact('post'));
     }
 
     /**
@@ -92,11 +92,10 @@ class PostController extends Controller
      */
     public function update(PatchRequest $request, Post $post)
     {
-        // dd(public_path('upload\posts'));
+        // dd($request);
         $data = $request->validated();
-        dd($request->image);
         if(isset($data['image'])){
-            $data['image'] = $filname = time().$data['image']->extension();
+            $data['image'] = $filname = time().'.'.$data['image']->extension();
             $request->image->move(public_path('uploads/posts'),$filname);
         };
 
@@ -109,6 +108,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return to_route('post.index');
     }
 }

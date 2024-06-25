@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\blog\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\PostController;
@@ -23,6 +24,10 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashboardMiddleware::class]], function () {
     Route::resource('post', PostController::class);
     Route::resource('category', CategoryController::class);
+});
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('detalle/{post}', [BlogController::class, 'show'])->name('blog.show');
 });
 
 // Route::resource('post', PostController::class);
